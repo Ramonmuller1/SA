@@ -1,0 +1,163 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #090a0f;
+    height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background-color: #3c067a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    padding: 0; 
+}
+
+.perfil, .settings-icon {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+}
+
+.perfil {
+    margin-left: 5vh;
+}
+
+.perfil i {
+    font-size: 24px;
+}
+
+.settings-icon {
+    margin-right: 5vh;
+}
+
+.settings-icon i {
+    font-size: 24px;
+}
+
+.center-icon a {
+    font-size: 28px;
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.create-playlist {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.create-playlist h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.input-group input, .input-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    background-color: #222;
+    color: white;
+}
+
+textarea {
+    resize: none;
+}
+
+button {
+    background-color: #655be1;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #5146e1;
+}
+
+.music-inputs {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+#playlist-music-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+}
+
+#playlist-music-list li {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remove-song-btn {
+    background-color: #e14b4b;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.remove-song-btn:hover {
+    background-color: #c73f3f;
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeBeats - Home</title>
+    <link rel="icon" type="image/x-icon" href="inicial/Images/logo.jpg" style="border-radius: 100%;">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.6.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="inicial/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="perfil">
+                <a href="perfil.html"><i class="ri-user-fill" style="color: white"></i></a>
+                <span>Perfil</span>
+            </div>
+            <div class="center-icon">
+                <nav class="nav">
+                    <img id="menu-button" class="menu-button" src="inicial/Images/logo.jpg" width="50px"
+                        alt="Icone-menu">
+                    <ul id="menu" class="menu">
+                        <li><a href="playlist.html"><span><img src="./inicial/Images/playlist.png" width="40px"
+                                        alt="Playlist-icon"></span></a></li>
+                        <li><a href="registrar-musica.html"><span><img src="./inicial/Images/registro.png" width="40px"
+                                        alt="Home-icon"></span></a></li>
+                        <li><a href="Historico.html"><span><img src="./inicial/Images/historico.jpg" width="40px"
+                                        alt="History-icon"></span></a></li>
+                        <li><a href="curtidos.html"><span><img src="./inicial/Images/like.png" width="40px"
+                                        alt="History-icon"></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="settings-icon">
+                <i class="ri-settings-5-fill"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="search-bar">
+            <input type="text" placeholder="Pesquisa">
+        </div>
+
+        <section class="recommendations">
+            <h2>Recomendações</h2>
+            <div class="genres">
+                <div class="genre">Sertanejo</div>
+                <div class="genre">Pop Music</div>
+                <div class="genre">Pagode</div>
+                <div class="genre">Jazz</div>
+                <div class="genre">Country</div>
+            </div>
+        </section>
+
+        <section class="popular-artists">
+            <h2>Artistas Populares</h2>
+            <div class="artists">
+                <div class="artist"><img src="inicial/Images/50cent.jpg" alt="Artista 1"></div>
+                <div class="artist"><img src="inicial/Images/frank.jpg" alt="Artista 2"></div>
+                <div class="artist"><img src="inicial/Images/laufey.jpg" alt="Artista 3"></div>
+                <div class="artist"><img src="inicial/Images/charles.png" alt="Artista 4"></div>
+                <div class="artist"><img src="inicial/Images/tupac.jpg" alt="Artista 5"></div>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="music-bar">
+        <div class="track-info">
+            <img class="album-cover" src="inicial/Images/album.jpg" alt="Album">
+            <div class="track-details">
+                <span class="track-title">Nome da Música</span>
+                <span class="track-artist">Artista</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="prev"><i class="ri-skip-back-fill"></i></button>
+            <button class="play-pause"><i class="ri-play-fill"></i></button>
+            <button class="next"><i class="ri-skip-forward-fill"></i></button>
+        </div>
+
+        <div class="progress">
+            <span class="progress-time">0:00</span>
+            <input type="range" class="progress-bar" value="0" max="100" />
+            <span class="progress-time">3:30</span>
+        </div>
+
+        <div class="volume-control">
+            <i class="ri-volume-up-fill"></i>
+            <input type="range" class="volume-bar" value="100" max="100" />
+        </div>
+    </footer>
+    <!-- Cenário da noite com estrelas cadentes -->
+    <div class="night">
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+    </div>
+
+    <script>
+        const menuButton = document.getElementById('menu-button');
+        const menu = document.getElementById('menu');
+        menuButton.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        function VeryfyUser() {
+            let usuarioLogado = sessionStorage.getItem(usuarioLogado)
+            if (!usuarioLogado) {
+                console.log("usuario não logado")
+                window.location.href = 'index.html'
+            }
+        }
+        window.onload = function () {
+            VeryfyUser()
+        }
+
+        const playPauseButton = document.querySelector('.play-pause');
+        const progressBar = document.querySelector('.progress-bar');
+        const volumeBar = document.querySelector('.volume-bar');
+        const progressTime = document.querySelectorAll('.progress-time');
+        const audio = new Audio('./player/james.mp3');
+
+        playPauseButton.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playPauseButton.innerHTML = '<i class="ri-pause-fill"></i>';
+            } else {
+                audio.pause();
+                playPauseButton.innerHTML = '<i class="ri-play-fill"></i>';
+            }
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressBar.value = progress;
+
+            const currentTimeFormatted = formatTime(audio.currentTime);
+            const durationFormatted = formatTime(audio.duration);
+            progressTime[0].textContent = currentTimeFormatted;
+            progressTime[1].textContent = durationFormatted;
+        });
+
+        progressBar.addEventListener('input', (e) => {
+            audio.currentTime = (e.target.value / 100) * audio.duration;
+        });
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        volumeBar.addEventListener('input', (e) => {
+            audio.volume = e.target.value / 100;
+        });
+
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+
+        prevButton.addEventListener('click', () => {
+            audio.currentTime -= 10;
+        });
+
+        nextButton.addEventListener('click', () => {
+            audio.currentTime += 10;
+        });
+    </script>
+</body>
+
+</html>
